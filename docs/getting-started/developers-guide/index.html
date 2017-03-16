@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>Developer’s Guide - WebAssembly</title>
+  <link rel="stylesheet" type="text/css" href="/css/custom.css">
+</head>
+
+
+<body>
+  <header class="page-section-spacious">
+    <div class="container">
+    <div class="site-logo">
+      <h1 class="title">WebAssembly</h1>
+    </div>
+    <nav class="site-nav">
+      <a class="site-nav-item btn" href="/">Overview</a>
+      <a class="site-nav-item btn" href="/demo/">Demo</a>
+      <a class="site-nav-item btn" href="/getting-started/developers-guide/">Getting Started</a>
+      
+      
+      <a class="site-nav-item btn" href="/docs/high-level-goals/">Docs</a>
+      <a class="site-nav-item btn" href="/community/feedback/">Community</a>
+      <a class="site-nav-item btn" href="/roadmap/">Roadmap</a>
+      <a class="site-nav-item btn" href="/docs/faq/">FAQ</a>
+    </nav>
+    </div>
+  </header>
+  <section class="banner-update">
+    <div class="container">
+      <div class="banner-update-icon"></div>
+      <span class="banner-update-date"></span>
+      <span>The initial version of WebAssembly has reached cross-browser consensus. <a href="/roadmap/">Learn more</a></span>
+    </div>
+  </section>
+  
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-lg-9 col-pop">
+        <h1 id="developers-guide">Developer’s Guide</h1>
+
+<p>This page provides step-by-step instructions to compile a simple program directly to WebAssembly.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+<p>To compile to WebAssembly, we will at the moment need to compile LLVM from source. The following tools are needed as a prerequisite:</p>
+
+<ul>
+  <li>Git. On Linux and OS X this is likely already present. On Windows download the <a href="https://git-scm.com/">Git for Windows</a> installer.</li>
+  <li>CMake. On Linux and OS X, one can use package managers like <code class="highlighter-rouge">apt-get</code> or <code class="highlighter-rouge">brew</code>, on Windows download <a href="https://cmake.org/download/">CMake installer</a>.</li>
+  <li>Host system compiler. On Linux, <a href="http://askubuntu.com/questions/154402/install-gcc-on-ubuntu-12-04-lts">install GCC</a>. On OS X, <a href="https://itunes.apple.com/us/app/xcode/id497799835">install Xcode</a>. On Windows, install <a href="https://www.visualstudio.com/downloads/">Visual Studio 2015 Community with Update 3</a> or newer.</li>
+  <li>Python 2.7.x. On Linux and OS X, this is most likely provided out of the box. See <a href="https://wiki.python.org/moin/BeginnersGuide/Download">here</a> for instructions.</li>
+</ul>
+
+<p>After installing, make sure that <code class="highlighter-rouge">git</code>, <code class="highlighter-rouge">cmake</code> and <code class="highlighter-rouge">python</code> are accessible in PATH.</p>
+
+<h3 id="compile-emscripten-from-source">Compile Emscripten from Source</h3>
+<p>Building Emscripten from source is automated via the Emscripten SDK. The required steps are as follows.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git clone https://github.com/juj/emsdk.git
+$ cd emsdk
+$ ./emsdk install sdk-incoming-64bit binaryen-master-64bit
+$ ./emsdk activate sdk-incoming-64bit binaryen-master-64bit
+</code></pre>
+</div>
+
+<p>After these steps, the installation is complete. To enter an Emscripten compiler environment in the current command line prompt, type</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ source ./emsdk_env.sh
+</code></pre>
+</div>
+
+<p>This command adds relevant environment variables and directory entries to PATH to set up the current terminal for easy access to the compiler tools.</p>
+
+<p>On Windows, replace <code class="highlighter-rouge">./emsdk</code> with just <code class="highlighter-rouge">emsdk</code>, and <code class="highlighter-rouge">source ./emsdk_env.sh</code> with <code class="highlighter-rouge">emsdk_env</code> above.</p>
+
+<h3 id="compile-and-run-a-simple-program">Compile and run a simple program</h3>
+<p>We now have a full toolchain we can use to compile a simple program to WebAssembly. There are a few remaining caveats, however:</p>
+
+<ul>
+  <li>We have to pass the linker flag <code class="highlighter-rouge">-s WASM=1</code> to <code class="highlighter-rouge">emcc</code> (otherwise by default <code class="highlighter-rouge">emcc</code> will emit asm.js).</li>
+  <li>If we want Emscripten to generate an HTML page that runs our program, in addition to the wasm binary and JavaScript wrapper, we have to specify an output filename with a <code class="highlighter-rouge">.html</code> extension.</li>
+  <li>Finally, to actually run the program, we cannot simply open the HTML file in a web browser because cross-origin requests are not supported for the <code class="highlighter-rouge">file</code> protocol scheme. We have to actually serve the output files over HTTP.</li>
+</ul>
+
+<p>The commands below will create a simple “hello world” program and compile it. The compilation step is highlighted in bold.</p>
+
+<pre>
+$ mkdir hello
+$ cd hello
+$ echo '#include &lt;stdio.h&gt;' &gt; hello.c
+$ echo 'int main(int argc, char ** argv) {' &gt;&gt; hello.c
+$ echo 'printf("Hello, world!\n");' &gt;&gt; hello.c
+$ echo '}' &gt;&gt; hello.c
+$ <b>emcc hello.c -s WASM=1 -o hello.html</b>
+</pre>
+
+<p>To serve the compiled files over HTTP, we can use the <code class="highlighter-rouge">emrun</code> web server provided with the Emscripten SDK:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ emrun --no_browser --port 8080 .
+</code></pre>
+</div>
+
+<p>Once the HTTP server is running, you can <a href="http://localhost:8080/hello.html" target="_blank">open it in your browser</a>. If you see “Hello, world!” printed to the Emscripten console, then congratulations! You’ve successfully compiled to WebAssembly!</p>
+
+      </div>
+      <div class="col-xs-12 col-lg-3">
+        <h6 class="side-title">Getting Started</h6>
+        <nav class="side-nav">
+          <a class="side-nav-item" href="/getting-started/developers-guide/">Developer's Guide</a>
+          <a class="side-nav-item" href="/getting-started/js-api/">JS API</a>
+          <a class="side-nav-item" href="/getting-started/advanced-tools/">Advanced Tools</a>
+          <a class="side-nav-item" href="https://developer.mozilla.org/en-US/docs/WebAssembly">WebAssembly on MDN ↳</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

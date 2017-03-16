@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>{% if page.url == "/" %}WebAssembly{% else %}{{ page.title }} - WebAssembly{% endif %}</title>
+  <link rel="stylesheet" type="text/css" href="/css/custom.css">
+</head>
+
+
+<body>
+  <header class="page-section-spacious">
+    <div class="container">
+    <div class="site-logo">
+      <h1 class="title">WebAssembly</h1>
+    </div>
+    <nav class="site-nav">
+      <a class="site-nav-item btn" href="/">Overview</a>
+      <a class="site-nav-item btn" href="/demo/">Demo</a>
+      <a class="site-nav-item btn" href="/getting-started/developers-guide/">Getting Started</a>
+      {% assign sorted = site.pages | sort:"weight"  %}
+      {% assign first_doc = sorted | where:"type","doc" | first %}
+      <a class="site-nav-item btn" href="{{ first_doc.url }}">Docs</a>
+      <a class="site-nav-item btn" href="/community/feedback/">Community</a>
+      <a class="site-nav-item btn" href="/roadmap/">Roadmap</a>
+      <a class="site-nav-item btn" href="/docs/faq/">FAQ</a>
+    </nav>
+    </div>
+  </header>
+  <section class="banner-update">
+    <div class="container">
+      <div class="banner-update-icon"></div>
+      <span class="banner-update-date"></span>
+      <span>The initial version of WebAssembly has reached cross-browser consensus. <a href="/roadmap/">Learn more</a></span>
+    </div>
+  </section>
+  {% if page.lead %}
+  <section class="page-section-spacious flush-bottom">
+    <div class="container-narrow">
+      <p class="lead">{{page.lead}}</p>
+    </div>
+  </section>
+  {% endif %}
