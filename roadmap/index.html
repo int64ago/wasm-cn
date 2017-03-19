@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>Roadmap - WebAssembly</title>
+  <title>规划 - WebAssembly</title>
   <link rel="stylesheet" type="text/css" href="/css/custom.css">
 </head>
 
@@ -38,54 +38,49 @@
 
 <section>
   <div class="container-narrow">  
-  <h1 id="roadmap">Roadmap</h1>
+  <h1 id="规划">规划</h1>
 
-<h2 id="webassembly-consensus">WebAssembly Consensus</h2>
+<h2 id="webassembly-共识">WebAssembly 共识</h2>
 
-<p>WebAssembly CG members representing four browsers, Chrome, Edge, Firefox, and WebKit, have reached consensus that the design of the initial (<a href="/docs/mvp/">MVP</a>) WebAssembly API and binary format is complete to the extent that no further design work is possible without implementation experience and significant usage. This marks the end of the Browser Preview and signals that browsers can begin shipping WebAssembly on-by-default. From this point forward, future features will be designed to ensure backwards compatibility.</p>
+<p>WebAssembly 社区成员由四个浏览器厂商组成：Chrome、Edge、Firefox 和 WebKit ，关于初版（<a href="/docs/mvp/">MVP</a>）WebAssembly 的 API 和二进制格式已经达成共识，之后除非有已经充分试验的或意义重大的功能，规范不会做大的更改。这就意味着已经结束了浏览器预览阶段，浏览器发布的时候可以默认开启 WebAssembly ，从现在开始，所有新增特性都会保证向后兼容性。</p>
 
-<p>This consensus includes a <a href="/docs/js/">JavaScript API</a> and <a href="/docs/binary-encoding/">binary format</a> accompanied by a <a href="https://github.com/WebAssembly/spec/tree/master/interpreter">reference interpreter</a>. You can test out WebAssembly today using the Emscripten toolchain by following the <a href="/getting-started/developers-guide/">developer’s guide</a> and reading more on <a href="https://developer.mozilla.org/en-US/docs/WebAssembly">MDN</a>. You can also explore a variety of other <a href="/getting-started/advanced-tools/">advanced tools</a>.</p>
+<p>共识包括 <a href="/docs/js/">JavaScript API</a> 和 <a href="/docs/binary-encoding/">二进制格式</a>（包括<a href="https://github.com/WebAssembly/spec/tree/master/interpreter">解释器</a>）。现在就可以参考<a href="/getting-started/developers-guide/">开发者指南</a>和 <a href="https://developer.mozilla.org/en-US/docs/WebAssembly">MDN 资源</a>，结合 Emscripten 进行尝试， 你也可以参考下<a href="/getting-started/advanced-tools/">其它工具</a></p>
 
-<p>See <a href="/getting-started/developers-guide/">Getting Started</a> to start experimenting and
-<a href="/community/feedback/">Feedback</a> for how and where to direct feedback.</p>
+<p>可以通过<a href="/getting-started/developers-guide/">快速开始</a>进行尝试，也可以直接给我们<a href="/community/feedback/">反馈</a></p>
 
-<p>See this message on the community group <a href="https://lists.w3.org/Archives/Public/public-webassembly/2017Feb/0002.html">mailing list</a>.</p>
+<blockquote>
+  <p>关于共识，通过<a href="https://lists.w3.org/Archives/Public/public-webassembly/2017Feb/0002.html">邮件列表</a>了解更多</p>
+</blockquote>
 
-<h2 id="next-steps">Next Steps</h2>
+<h2 id="接下来的计划">接下来的计划</h2>
 
-<p>The WebAssembly community group and contributors plan to:</p>
+<p>WebAssembly 社区和贡献者接下来要完成以下事宜：</p>
 
 <ul>
-  <li>distill the <a href="https://github.com/webassembly/design">design</a>
-and <a href="https://github.com/WebAssembly/spec/tree/master/interpreter">spec interpreter</a> repos
-into a single unified specification in the <a href="https://github.com/WebAssembly/spec">spec</a>
-repo</li>
-  <li>propose a new charter for a W3C WebAssembly Working Group</li>
-  <li>graduate the <a href="https://github.com/llvm-mirror/llvm/tree/master/test/CodeGen/WebAssembly">WebAssembly LLVM backend</a> from experimental to stable (and update Emscripten)</li>
-  <li>prototype additional WebAssembly integration into browser developer tools</li>
-  <li>Start work on <a href="/docs/future-features/">post-MVP features</a></li>
+  <li>把 <a href="https://github.com/webassembly/design">design</a>
+和 <a href="https://github.com/WebAssembly/spec/tree/master/interpreter">spec interpreter</a> 两个仓库提取并合并到一个统一的仓库 <a href="https://github.com/WebAssembly/spec">spec</a></li>
+  <li>为 W3C WebAssembly 工作组制定一个新的规章制度</li>
+  <li>结束 <a href="https://github.com/llvm-mirror/llvm/tree/master/test/CodeGen/WebAssembly">WebAssembly LLVM backend</a> 实验版本，切为稳定版（更新 Emscripten）</li>
+  <li>把 WebAssembly 集成到浏览器的开发者工具里</li>
+  <li>针对 <a href="/docs/future-features/">post-MVP features</a> 开展工作</li>
 </ul>
 
-<h2 id="changes-since-the-browser-preview">Changes Since the Browser Preview</h2>
+<h2 id="直到浏览器预览阶段已完成">直到浏览器预览阶段已完成</h2>
 
 <ul>
-  <li>The <a href="/docs/binary-encoding/#high-level-structure">binary version</a>
-  of WebAssembly has been frozen at <code class="highlighter-rouge">0x1</code> (from this point forward
-  all new features will be added in a backwards-compatible manner,
-  and be detected through feature-testing). To update your
-  WebAssembly modules, upgrade to the latest version of Emscripten 
-  and recompile.</li>
+  <li>WebAssembly 的<a href="/docs/binary-encoding/#high-level-structure">二进制版本</a>
+已经冻结并标记为 <code class="highlighter-rouge">0x1</code>（之后所有新增的特性都会保证向下兼容性），可以通过升级 Emscripten 并且重新编译来更新 WebAssembly 模块</li>
 </ul>
 
-<h2 id="past-milestones">Past Milestones</h2>
+<h2 id="已经完成的里程碑">已经完成的里程碑</h2>
 
 <ul>
-  <li>April 2015 - <a href="https://www.w3.org/community/webassembly">WebAssembly Community Group</a> started</li>
-  <li>June 2015 - The first <a href="https://github.com/WebAssembly/design/issues/150">public announcement</a> [<a href="https://blogs.msdn.microsoft.com/mikeholman/2015/06/17/working-on-the-future-of-compile-to-web-applications/">1</a>][<a href="https://blog.mozilla.org/luke/2015/06/17/webassembly/">2</a>]</li>
-  <li>March 2016 - Definition of core feature with multiple interoperable implementations [<a href="https://blogs.windows.com/msedgedev/2016/03/15/previewing-webassembly-experiments">1</a>] [<a href="https://v8project.blogspot.com/2016/03/experimental-support-for-webassembly.html">2</a>] [<a href="https://hacks.mozilla.org/2016/03/a-webassembly-milestone/">3</a>]</li>
-  <li>October 2016 - Browser Preview announced with multiple interoperable implementations [<a href="https://blogs.windows.com/msedgedev/2016/10/31/webassembly-browser-preview/">1</a>] [<a href="http://v8project.blogspot.com/2016/10/webassembly-browser-preview.html">2</a>] [<a href="https://hacks.mozilla.org/2016/10/webassembly-browser-preview">3</a>]</li>
-  <li>February 2017 - Official <a href="https://github.com/WebAssembly/design/issues/980">logo</a> chosen</li>
-  <li>March 2017 - <a href="https://lists.w3.org/Archives/Public/public-webassembly/2017Feb/0002.html">Cross-browser consensus</a> and end of Browser Preview</li>
+  <li>2015 年 4 月 - <a href="https://www.w3.org/community/webassembly">WebAssembly 社区</a> 成立</li>
+  <li>2015 年 6 月 - 第一份<a href="https://github.com/WebAssembly/design/issues/150">公告</a> [<a href="https://blogs.msdn.microsoft.com/mikeholman/2015/06/17/working-on-the-future-of-compile-to-web-applications/">1</a>][<a href="https://blog.mozilla.org/luke/2015/06/17/webassembly/">2</a>]发表</li>
+  <li>2016 年 3 月 - 核心的可行性特性确定 [<a href="https://blogs.windows.com/msedgedev/2016/03/15/previewing-webassembly-experiments">1</a>] [<a href="https://v8project.blogspot.com/2016/03/experimental-support-for-webassembly.html">2</a>] [<a href="https://hacks.mozilla.org/2016/03/a-webassembly-milestone/">3</a>]</li>
+  <li>2016 年 10 月 - 多个可行性特性实现并发布浏览器预览 [<a href="https://blogs.windows.com/msedgedev/2016/10/31/webassembly-browser-preview/">1</a>] [<a href="http://v8project.blogspot.com/2016/10/webassembly-browser-preview.html">2</a>] [<a href="https://hacks.mozilla.org/2016/10/webassembly-browser-preview">3</a>]</li>
+  <li>2017 年 2 月 - 官方 <a href="https://github.com/WebAssembly/design/issues/980">LOGO</a>  敲定</li>
+  <li>2017 年 3 月 - <a href="https://lists.w3.org/Archives/Public/public-webassembly/2017Feb/0002.html">多个浏览器达成共识</a>，同时结束了浏览器预览阶段</li>
 </ul>
 
   </div>
