@@ -2,31 +2,22 @@
 layout: community
 ---
 
-# Contributing to WebAssembly
+# 向 WebAssembly 贡献
 
-WebAssembly is initially designed and implemented by browser vendors who are
-interested in meeting a variety of [use cases](/docs/use-cases/). As design and
-implementation progresses they'll need input and contributions from developers
-interested in using WebAssembly.
+WebAssembly 初期是由对满足各种[使用场景](/docs/use-cases/)感兴趣的浏览器厂商设计和实现的，推进的过程中，他们需要对 WebAssembly 感兴趣的开发者积极反馈
 
-Interested in participating? We suggest you start by:
+想参与进来？建议先从以下入手：
 
-1. Acquainting yourself with the
-   [Code of Ethics and Professional Conduct](/community/code-of-conduct/).
-2. Reading the [WebAssembly design][].
-3. Joining the IRC channel `irc://irc.w3.org:6667/#webassembly`.
+1. 熟悉[编码规范](/community/code-of-conduct/).
+2. 完整阅读 [WebAssembly 设计][].
+3. 加入 IRC 频道 `irc://irc.w3.org:6667/#webassembly`.
 
-With that background understood and communication set up, feel free to
-[file issues][] in the WebAssembly design repository. Please join the
-[W3C Community Group][] before sending pull requests: it provides the legal
-framework that protects the work in this repository. Make sure you're affiliated
-with your company or organization in the Community Group, if any.
+熟悉了项目背景和社区原则之后，欢迎在仓库提 [Issues][]，提 PR 之前需要先加入 [W3C 社区][W3C Community Group]：它为仓库运行提供了法律支持，请确认你的公司或组织隶属于社区
 
-As WebAssembly moves forward we expect to form an official standards body, which
-will have its own contribution process to the specification.
+因为 WebAssembly 期望成为一个标准组织，因此会有一套自己的贡献处理流程
 
-Happy assembly!
+摇滚吧 assembly! 😜
 
   [WebAssembly design]: https://github.com/WebAssembly/design
-  [file issues]: https://github.com/WebAssembly/design/issues
+  [Issues]: https://github.com/WebAssembly/design/issues
   [W3C Community Group]: https://www.w3.org/community/webassembly/
