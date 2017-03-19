@@ -3,18 +3,18 @@ layout: default
 markdown: kramdown
 permalink: demo/
 ---
-# Tanks! Demo
+# Tanks! 实例
 
 [![](screenshot.jpg)](Tanks/)
 <div id="play-wasm" class="btn-block">
-  <a class="btn btn-primary" href="Tanks/" role="button">Play WebAssembly</a>
+  <a class="btn btn-primary" href="Tanks/" role="button">试试吧</a>
 </div>
 <div id="play-asm" class="btn-block hide-btn-block">
-  <a class="btn hide-asm-support" href="Tanks/" role="button">Play asm.js fallback</a>
-  <span class="btn-comment btn-comment-error hide-asm-support">Your browser doesn't support WebAssembly yet. <a href="/roadmap/">Learn more</a></span>
+  <a class="btn hide-asm-support" href="Tanks/" role="button">回退到 asm.js</a>
+  <span class="btn-comment btn-comment-error hide-asm-support">你的浏览器还不支持 WebAssembly ，<a href="/roadmap/">了解更多</a></span>
 </div>
 
-This is a demo of [Tanks!, a Unity tutorial game](https://unity3d.com/learn/tutorials/projects/tanks-tutorial) which has been exported to WebAssembly. Drive tanks around the sandbox and shoot the enemy tank in this local multiplayer game. Blue Tank movement is controlled by W, A, S, D keys and firing by the spacebar. Red Tank movement is controlled by the arrow keys, and firing by Enter.
+这个例子是游戏 [Tanks!，一个 Unity 的教学实例](https://unity3d.com/learn/tutorials/projects/tanks-tutorial) 已经转为 WebAssembly 格式了。沙地里开动坦克并且射击地方坦克，这是一个多人游戏，蓝色坦克通过 W/A/S/D 按键移动，按空格键发射子弹；红色坦克通过方向键移动，通过回车键发射子弹
 
 <script type="text/javascript" >
 (function() {
