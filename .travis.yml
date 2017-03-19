@@ -25,7 +25,7 @@ after_success:
 - cd .deploy
 - git clone --depth 1 --branch gh-pages --single-branch https://$REPO_TOKEN@github.com/int64ago/wasm-cn.git . || (git init && git remote add -t gh-pages origin https://$REPO_TOKEN@github.com/int64ago/wasm-cn.git)
 - rm -rf ./*
-- cp -r ./docs/* .
+- cp -r ../docs/* .
 - git add -A .
 - git commit -m 'Auto updated'
 - git branch -m gh-pages
