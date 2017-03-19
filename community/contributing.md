@@ -8,7 +8,7 @@ WebAssembly 初期是由对满足各种[使用场景](/docs/use-cases/)感兴趣
 
 想参与进来？建议先从以下入手：
 
-1. 熟悉[编码规范](/community/code-of-conduct/).
+1. 熟悉[道德规范和职业准则](/community/code-of-conduct/).
 2. 完整阅读 [WebAssembly 设计][WebAssembly design].
 3. 加入 IRC 频道 `irc://irc.w3.org:6667/#webassembly`.
 

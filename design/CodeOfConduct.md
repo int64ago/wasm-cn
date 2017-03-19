@@ -1,7 +1,6 @@
-# Code of Ethics and Professional Conduct
+# 道德规范和职业准则
 
-WebAssembly operates under the W3C's
-[Code of Ethics and Professional Conduct][]:
+WebAssembly 依赖 W3C 的[道德规范和职业准则][Code of Ethics and Professional Conduct]：
 
 > W3C is a growing and global community where participants choose to work
 > together, and in that process experience differences in language, location,
@@ -15,12 +14,7 @@ WebAssembly operates under the W3C's
 > practice. It also provides a benchmark for self evaluation and acts as a
 > vehicle for better identity of the organization.
 
-We hope that our community group act according to these guidelines, and that
-participants hold each other to these high standards. If you have any questions
-or are worried that the code isn't being followed, please contact the Community
-Group's chairs at `team-webassembly-chairs@w3.org` (note: this list is also
-visible to W3C staff). For very serious concerns, the W3C has [procedures][]
-allowing you to access its ombuds directly and confidentially.
+我们希望我们社区能够遵守这个规范，如果你发现有任何代码违背了这些原则，你可以通过邮件 `team-webassembly-chairs@w3.org` 联系社区（注意：邮件也会被 W3C 员工看到），特别注意的是 W3C 有相关 [规章制度][procedures] 可以使你直接联系到申诉员
 
   [Code of Ethics and Professional Conduct]: https://www.w3.org/Consortium/cepc
   [procedures]: https://www.w3.org/Consortium/pwe/#Procedures

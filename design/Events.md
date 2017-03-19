@@ -1,6 +1,6 @@
 ## 已结束
 
-| Date | Title | Slides | Video | Presenter(s) |
+| 日期 | 主题 | 文档 | 视频 | 演讲者 |
 |-----:|-------|:------:|:-----:|--------------|
 | 2015-10-29 | LLVM Developers' Meeting   | [slides](http://llvm.org/devmtg/2015-10/slides/BastienGohman-WebAssembly-HereBeDragons.pdf) | [video](https://www.youtube.com/watch?v=5W7NkofUtAw) | JF Bastien and Dan Gohman |
 | 2015-11-10 | BlinkOn 5: WebAssembly     | | [video](https://youtu.be/iCSAUHpPbiU) | Nick Bray |
