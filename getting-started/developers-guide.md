@@ -2,44 +2,44 @@
 layout: getting-started
 ---
 
-# Developer's Guide
+# 开发者指南
 
-This page provides step-by-step instructions to compile a simple program directly to WebAssembly.
+在这里，手把手教你编译一个 WebAssembly 程序
 
-### Prerequisites
-To compile to WebAssembly, we will at the moment need to compile LLVM from source. The following tools are needed as a prerequisite:
+### 依赖
+编译 WebAssembly 之前，需要先从源码编译 LLVM ，以下是一些依赖：
 
-- Git. On Linux and OS X this is likely already present. On Windows download the [Git for Windows](https://git-scm.com/) installer.
-- CMake. On Linux and OS X, one can use package managers like `apt-get` or `brew`, on Windows download [CMake installer](https://cmake.org/download/).
-- Host system compiler. On Linux, [install GCC](http://askubuntu.com/questions/154402/install-gcc-on-ubuntu-12-04-lts). On OS X, [install Xcode](https://itunes.apple.com/us/app/xcode/id497799835). On Windows, install [Visual Studio 2015 Community with Update 3](https://www.visualstudio.com/downloads/) or newer.
-- Python 2.7.x. On Linux and OS X, this is most likely provided out of the box. See [here](https://wiki.python.org/moin/BeginnersGuide/Download) for instructions.
+- Git，Linux 和 OSX 这个应该是内置的，Windows 的话可以直接下载 [Git for Windows](https://git-scm.com/) 安装
+- CMake，如果是 Linux 或 OSX，可以通过包管理器如 `apt-get` 或 `brew` 等安装，Windows 需要下载 [CMake installer](https://cmake.org/download/) 并安装
+- 编译器，Linux 安装 [GCC](http://askubuntu.com/questions/154402/install-gcc-on-ubuntu-12-04-lts)，OSX 安装 [Xcode](https://itunes.apple.com/us/app/xcode/id497799835) ，Windows 安装 [VS2015+](https://www.visualstudio.com/downloads/)
+- Python 2.7.x，Linux 和 OSX 这个应该是内置的，其它具体见 [这里](https://wiki.python.org/moin/BeginnersGuide/Download)
 
-After installing, make sure that `git`, `cmake` and `python` are accessible in PATH.
+安装完后，请确保 `git` 、 `cmake` 和 `python` 环境变量配置正确
 
-### Compile Emscripten from Source
-Building Emscripten from source is automated via the Emscripten SDK. The required steps are as follows.
+### 从源码构建 Emscripten
+从源码构建 Emscripten 是通过 Emscripten SDK 自动进行的，步骤如下：
 
     $ git clone https://github.com/juj/emsdk.git
     $ cd emsdk
     $ ./emsdk install sdk-incoming-64bit binaryen-master-64bit
     $ ./emsdk activate sdk-incoming-64bit binaryen-master-64bit
 
-After these steps, the installation is complete. To enter an Emscripten compiler environment in the current command line prompt, type
+以上步骤结束后，设置下 Emscripten 编译器环境变量
 
     $ source ./emsdk_env.sh
 
-This command adds relevant environment variables and directory entries to PATH to set up the current terminal for easy access to the compiler tools.
+这个命令把相关的环境变量加入到 PATH 下，不过只限当前终端有效
 
-On Windows, replace `./emsdk` with just `emsdk`, and `source ./emsdk_env.sh` with `emsdk_env` above.
+如果是 Windows，仅仅把上述的 `./emsdk` 替换为 `emsdk` ，把 `source ./emsdk_env.sh` 替换为 `emsdk_env` 即可
 
-### Compile and run a simple program
-We now have a full toolchain we can use to compile a simple program to WebAssembly. There are a few remaining caveats, however:
+### 编译并运行一个简单程序
+现在我们构建 WebAssembly 可谓万事俱备只欠东风了，但还有些注意事项：
 
-- We have to pass the linker flag `-s WASM=1` to `emcc` (otherwise by default `emcc` will emit asm.js).
-- If we want Emscripten to generate an HTML page that runs our program, in addition to the wasm binary and JavaScript wrapper, we have to specify an output filename with a `.html` extension.
-- Finally, to actually run the program, we cannot simply open the HTML file in a web browser because cross-origin requests are not supported for the `file` protocol scheme. We have to actually serve the output files over HTTP.
+- `emcc` 需要传参数 `-s WASM=1` （默认编译出 asm.js）
+- 如果想让 Emscripten 直接编译出可直接使用的 HTML 而不是 wasm 二进制，你需要指定输出后缀为 `.html`
+- 最后，不可以直接打开 HTML 去看运行的结果，因为有跨域限制，我们需要去启动一个简单的 HTTP 服务器
 
-The commands below will create a simple "hello world" program and compile it. The compilation step is highlighted in bold.
+以下命令会创建一个简单的 "hello world" 程序，编译部分已经加粗
 
 <pre>
 $ mkdir hello
@@ -51,8 +51,8 @@ $ echo '}' &gt;&gt; hello.c
 $ <b>emcc hello.c -s WASM=1 -o hello.html</b>
 </pre>
 
-To serve the compiled files over HTTP, we can use the `emrun` web server provided with the Emscripten SDK:
+我们可以直接使用 Emscripten SDK 提供的 `emrun` 来启一个 Web 服务器
 
     $ emrun --no_browser --port 8080 .
 
-Once the HTTP server is running, you can <a href="http://localhost:8080/hello.html" target="_blank">open it in your browser</a>. If you see "Hello, world!" printed to the Emscripten console, then congratulations! You've successfully compiled to WebAssembly!
+服务启动后可以<a href="http://localhost:8080/hello.html" target="_blank">浏览器访问这个</a>看效果，如果你看到控制台输出了 "Hello, world!"， 恭喜你，成功完成了第一个 WebAssembly 程序！
