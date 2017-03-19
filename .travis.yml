@@ -1,8 +1,14 @@
 language: ruby
 
+rvm:
+  - 2
+
 branches:
   only:
   - master
+
+before_install:
+  - gem install bundler
 
 install:
 - bundle install
