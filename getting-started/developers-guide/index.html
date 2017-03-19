@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>Developer’s Guide - WebAssembly</title>
+  <meta name="keywords" content="WebAssembly,wasm,中文,文档,中文文档"/>
+  <meta name="description" content="WebAssembly 中文文档"/>
+  <title>开发者指南 - WebAssembly</title>
   <link rel="stylesheet" type="text/css" href="/css/custom.css">
 </head>
 
@@ -25,7 +27,7 @@
       <a class="site-nav-item btn" href="/roadmap/">规划</a>
       <a class="site-nav-item btn" href="/docs/faq/">问答</a>
       <a href="https://github.com/int64ago/wasm-cn" target="_blank">
-        <img style="vertical-align: middle" width="74" height="20" src="https://img.shields.io/github/forks/int64ago/wasm-cn.svg?style=social&label=Fork">
+        <img style="vertical-align: middle" width="74" height="20" src="https://img.shields.io/github/stars/int64ago/wasm-cn.svg?style=social&label=Star">
       </a>
     </nav>
     </div>
@@ -34,7 +36,7 @@
     <div class="container">
       <div class="banner-update-icon"></div>
       <span class="banner-update-date"></span>
-      <span>初版 WebAssembly 已经由各个浏览器厂商达成共识，<a href="/roadmap/">了解更多</a></span>
+      <span>WebAssembly 初版规范已由各个浏览器厂商达成共识，<a href="/roadmap/">了解更多</a></span>
     </div>
   </section>
   
@@ -43,24 +45,24 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-lg-9 col-pop">
-        <h1 id="developers-guide">Developer’s Guide</h1>
+        <h1 id="开发者指南">开发者指南</h1>
 
-<p>This page provides step-by-step instructions to compile a simple program directly to WebAssembly.</p>
+<p>在这里，手把手教你编译一个 WebAssembly 程序</p>
 
-<h3 id="prerequisites">Prerequisites</h3>
-<p>To compile to WebAssembly, we will at the moment need to compile LLVM from source. The following tools are needed as a prerequisite:</p>
+<h3 id="依赖">依赖</h3>
+<p>编译 WebAssembly 之前，需要先从源码编译 LLVM ，以下是一些依赖：</p>
 
 <ul>
-  <li>Git. On Linux and OS X this is likely already present. On Windows download the <a href="https://git-scm.com/">Git for Windows</a> installer.</li>
-  <li>CMake. On Linux and OS X, one can use package managers like <code class="highlighter-rouge">apt-get</code> or <code class="highlighter-rouge">brew</code>, on Windows download <a href="https://cmake.org/download/">CMake installer</a>.</li>
-  <li>Host system compiler. On Linux, <a href="http://askubuntu.com/questions/154402/install-gcc-on-ubuntu-12-04-lts">install GCC</a>. On OS X, <a href="https://itunes.apple.com/us/app/xcode/id497799835">install Xcode</a>. On Windows, install <a href="https://www.visualstudio.com/downloads/">Visual Studio 2015 Community with Update 3</a> or newer.</li>
-  <li>Python 2.7.x. On Linux and OS X, this is most likely provided out of the box. See <a href="https://wiki.python.org/moin/BeginnersGuide/Download">here</a> for instructions.</li>
+  <li>Git，Linux 和 OSX 这个应该是内置的，Windows 的话可以直接下载 <a href="https://git-scm.com/">Git for Windows</a> 安装</li>
+  <li>CMake，如果是 Linux 或 OSX，可以通过包管理器如 <code class="highlighter-rouge">apt-get</code> 或 <code class="highlighter-rouge">brew</code> 等安装，Windows 需要下载 <a href="https://cmake.org/download/">CMake installer</a> 并安装</li>
+  <li>编译器，Linux 安装 <a href="http://askubuntu.com/questions/154402/install-gcc-on-ubuntu-12-04-lts">GCC</a>，OSX 安装 <a href="https://itunes.apple.com/us/app/xcode/id497799835">Xcode</a> ，Windows 安装 <a href="https://www.visualstudio.com/downloads/">VS2015+</a></li>
+  <li>Python 2.7.x，Linux 和 OSX 这个应该是内置的，其它具体见 <a href="https://wiki.python.org/moin/BeginnersGuide/Download">这里</a></li>
 </ul>
 
-<p>After installing, make sure that <code class="highlighter-rouge">git</code>, <code class="highlighter-rouge">cmake</code> and <code class="highlighter-rouge">python</code> are accessible in PATH.</p>
+<p>安装完后，请确保 <code class="highlighter-rouge">git</code> 、 <code class="highlighter-rouge">cmake</code> 和 <code class="highlighter-rouge">python</code> 环境变量配置正确</p>
 
-<h3 id="compile-emscripten-from-source">Compile Emscripten from Source</h3>
-<p>Building Emscripten from source is automated via the Emscripten SDK. The required steps are as follows.</p>
+<h3 id="从源码构建-emscripten">从源码构建 Emscripten</h3>
+<p>从源码构建 Emscripten 是通过 Emscripten SDK 自动进行的，步骤如下：</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>$ git clone https://github.com/juj/emsdk.git
 $ cd emsdk
@@ -69,26 +71,26 @@ $ ./emsdk activate sdk-incoming-64bit binaryen-master-64bit
 </code></pre>
 </div>
 
-<p>After these steps, the installation is complete. To enter an Emscripten compiler environment in the current command line prompt, type</p>
+<p>以上步骤结束后，设置下 Emscripten 编译器环境变量</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>$ source ./emsdk_env.sh
 </code></pre>
 </div>
 
-<p>This command adds relevant environment variables and directory entries to PATH to set up the current terminal for easy access to the compiler tools.</p>
+<p>这个命令把相关的环境变量加入到 PATH 下，不过只限当前终端有效</p>
 
-<p>On Windows, replace <code class="highlighter-rouge">./emsdk</code> with just <code class="highlighter-rouge">emsdk</code>, and <code class="highlighter-rouge">source ./emsdk_env.sh</code> with <code class="highlighter-rouge">emsdk_env</code> above.</p>
+<p>如果是 Windows，仅仅把上述的 <code class="highlighter-rouge">./emsdk</code> 替换为 <code class="highlighter-rouge">emsdk</code> ，把 <code class="highlighter-rouge">source ./emsdk_env.sh</code> 替换为 <code class="highlighter-rouge">emsdk_env</code> 即可</p>
 
-<h3 id="compile-and-run-a-simple-program">Compile and run a simple program</h3>
-<p>We now have a full toolchain we can use to compile a simple program to WebAssembly. There are a few remaining caveats, however:</p>
+<h3 id="编译并运行一个简单程序">编译并运行一个简单程序</h3>
+<p>现在我们构建 WebAssembly 可谓万事俱备只欠东风了，但还有些注意事项：</p>
 
 <ul>
-  <li>We have to pass the linker flag <code class="highlighter-rouge">-s WASM=1</code> to <code class="highlighter-rouge">emcc</code> (otherwise by default <code class="highlighter-rouge">emcc</code> will emit asm.js).</li>
-  <li>If we want Emscripten to generate an HTML page that runs our program, in addition to the wasm binary and JavaScript wrapper, we have to specify an output filename with a <code class="highlighter-rouge">.html</code> extension.</li>
-  <li>Finally, to actually run the program, we cannot simply open the HTML file in a web browser because cross-origin requests are not supported for the <code class="highlighter-rouge">file</code> protocol scheme. We have to actually serve the output files over HTTP.</li>
+  <li><code class="highlighter-rouge">emcc</code> 需要传参数 <code class="highlighter-rouge">-s WASM=1</code> （默认编译出 asm.js）</li>
+  <li>如果想让 Emscripten 直接编译出可直接使用的 HTML 而不是 wasm 二进制，你需要指定输出后缀为 <code class="highlighter-rouge">.html</code></li>
+  <li>最后，不可以直接打开 HTML 去看运行的结果，因为有跨域限制，我们需要去启动一个简单的 HTTP 服务器</li>
 </ul>
 
-<p>The commands below will create a simple “hello world” program and compile it. The compilation step is highlighted in bold.</p>
+<p>以下命令会创建一个简单的 “hello world” 程序，编译部分已经加粗</p>
 
 <pre>
 $ mkdir hello
@@ -100,13 +102,13 @@ $ echo '}' &gt;&gt; hello.c
 $ <b>emcc hello.c -s WASM=1 -o hello.html</b>
 </pre>
 
-<p>To serve the compiled files over HTTP, we can use the <code class="highlighter-rouge">emrun</code> web server provided with the Emscripten SDK:</p>
+<p>我们可以直接使用 Emscripten SDK 提供的 <code class="highlighter-rouge">emrun</code> 来启一个 Web 服务器</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>$ emrun --no_browser --port 8080 .
 </code></pre>
 </div>
 
-<p>Once the HTTP server is running, you can <a href="http://localhost:8080/hello.html" target="_blank">open it in your browser</a>. If you see “Hello, world!” printed to the Emscripten console, then congratulations! You’ve successfully compiled to WebAssembly!</p>
+<p>服务启动后可以<a href="http://localhost:8080/hello.html" target="_blank">浏览器访问这个</a>看效果，如果你看到控制台输出了 “Hello, world!”， 恭喜你，成功完成了第一个 WebAssembly 程序！</p>
 
       </div>
       <div class="col-xs-12 col-lg-3">
