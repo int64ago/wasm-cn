@@ -2,24 +2,24 @@
 layout: community
 ---
 
-# Submitting Feedback & Issues
+# 提交您的反馈
 
-We welcome community and developer feedback on all aspects of WebAssembly, including the high-level design, binary format, JS API, developer experience, and browser implementations.
+我们欢迎社区和开发者对 WebAssembly 的任何部分提意见或建议，包括：架构设计、二进制格式、 JS API 、开发体验，以及浏览器实现等
 
 <div class="flash flash-warn">
-  We're especially interested in hearing from developers during the <a href="/roadmap/">Browser Preview</a> period, while WebAssembly is still implemented behind a flag.
+  我们非常乐意您在<a href="/roadmap/">浏览器预览</a>阶段就提出各种意见，因为此时 WebAssembly 还处于待定状态
 </div>
 
-Please contribute your feedback or issues in the following forums:
+请通过以下途径进行反馈：
 
-  - High level design, binary format, and JS API feedback: [WebAssembly/design][]
-  - Emscripten / Binaryen / LLVM issues: [WebAssembly/binaryen][]
-  - WABT issues: [WebAssembly/wabt][]
-  - V8 / Chrome bugs: [crbug.com/v8][]
-  - SpiderMonkey / Firefox bugs: [bugzilla.mozilla.org][]
-  - Chakra / Edge bugs: [Microsoft/ChakraCore][]
-  - Documentation typos / suggestions: [WebAssembly/design][]
-  - Website bugs: [WebAssembly/website][]
+  - 架构设计、二进制格式、 JS API 反馈： [WebAssembly/design][]
+  - Emscripten 、 Binaryen 、 LLVM 反馈： [WebAssembly/binaryen][]
+  - WABT 反馈： [WebAssembly/wabt][]
+  - V8 和 Chrome 反馈： [crbug.com/v8][]
+  - SpiderMonkey 和 Firefox 反馈： [bugzilla.mozilla.org][]
+  - Chakra 和 Edge 反馈: [Microsoft/ChakraCore][]
+  - 文档错误或拼写错误反馈： [WebAssembly/design][]
+  - 网站问题反馈： [WebAssembly/website][]
 
 [WebAssembly/design]: https://github.com/WebAssembly/design
 [WebAssembly/binaryen]: https://github.com/WebAssembly/binaryen
