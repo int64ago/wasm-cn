@@ -1,27 +1,27 @@
 ---
 layout: default
-lead: WebAssembly or <i>wasm</i> is a new portable, size- and load-time-efficient format suitable for compilation to the web.
+lead: WebAssembly 或者 <i>wasm</i> 是一个体积小、加载快并且兼容 Web 的全新格式
 ---
 <div class="flash flash-warn">
-  WebAssembly is currently being designed as an open standard by a <a href="https://www.w3.org/community/webassembly/">W3C Community Group</a> that includes representatives from all major browsers.
+  WebAssembly 是由主流浏览器厂商组成的 <a href="https://www.w3.org/community/webassembly/">W3C 社区团体</a>制定的一个新的规范
 </div>
 <div class="row">
   <div class="bubble col-xs-12 col-md-6">
-    <h3>Efficient and fast</h3>
-    <p>The wasm <a href="/docs/semantics/">stack machine</a> is designed to be encoded in a size- and load-time-efficient <a href="/docs/binary-encoding/">binary format</a>. WebAssembly aims to execute at native speed by taking advantage of <a href="/docs/portability/#assumptions-for-efficient-execution">common hardware capabilities</a> available on a wide range of platforms.</p>
+    <h3>效率</h3>
+    <p>WebAssembly 有一套完整的<a href="/docs/semantics/">语义</a>，因此 wasm 是体积小且加载快的<a href="/docs/binary-encoding/">二进制格式</a>， WebAssembly 目标是充分发挥<a href="/docs/portability/#assumptions-for-efficient-execution">硬件能力</a>以达到原生执行效率</p>
   </div>
   <div class="bubble col-xs-12 col-md-6">
-    <h3>Safe</h3>
-    <p>WebAssembly describes a memory-safe, sandboxed <a href="/docs/semantics/#linear-memory">execution environment</a> that may even be implemented inside existing JavaScript virtual machines. When <a href="/docs/web/">embedded in the web</a>, WebAssembly will enforce the same-origin and permissions security policies of the browser.</p>
+    <h3>安全</h3>
+    <p>在现有的 JavaScript 虚拟机里， WebAssembly 程序运行在一个沙箱化的<a href="/docs/semantics/#linear-memory">执行环境</a>里，<a href="/docs/web/">嵌入网站</a>运行时 WebAssembly 会强制启用同源策略以及浏览器安全策略</p>
   </div>
 </div>
 <div class="row">
   <div class="bubble col-xs-12 col-md-6">
-    <h3>Open and debuggable</h3>
-    <p>WebAssembly is designed to be pretty-printed in a <a href="/docs/text-format/">textual format</a> for debugging, testing, experimenting, optimizing, learning, teaching, and writing programs by hand. The textual format will be used when <a href="/docs/faq/#will-webassembly-support-view-source-on-the-web">viewing the source</a> of wasm modules on the web.</p>
+    <h3>开放</h3>
+    <p>WebAssembly 虽然被设计为二进制格式，但是也可以转为友好的<a href="/docs/text-format/">文本格式</a>进行调试、测试、试验、优化、学习，甚至直接手写，具体可以通过 wasm 模块的<a href="/docs/faq/#will-webassembly-support-view-source-on-the-web">查看源码</a>进行查看</p>
   </div>
   <div class="bubble col-xs-12 col-md-6">
-    <h3>Part of the open web platform</h3>
-    <p>WebAssembly is designed to maintain the versionless, feature-tested, and backwards-compatible <a href="/docs/web/">nature of the web</a>. WebAssembly modules will be able to call into and out of the JavaScript context and access browser functionality through the same Web APIs accessible from JavaScript. WebAssembly also supports <a href="/docs/non-web/">non-web</a> embeddings.</p>
+    <h3>标准</h3>
+    <p>WebAssembly 一开始就被设计为作为<a href="/docs/web/">Web 的一部分</a>， WebAssembly 模块可以直接调用 Web APIs，当然，WebAssembly 也支持<a href="/docs/non-web/">非 Web</a>环境</p>
   </div>
 </div>
