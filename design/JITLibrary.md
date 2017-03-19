@@ -1,4 +1,4 @@
-# JIT and Optimization Library
+# JIT 和优化
 
 WebAssembly's
 [Just-in-Time compilation (JIT)](FutureFeatures.md#platform-independent-just-in-time-jit-compilation)

@@ -1,4 +1,4 @@
-# Portability
+# 可移植性
 
 WebAssembly's [binary format](BinaryEncoding.md) is designed to be executable
 efficiently on a variety of operating systems and instruction set architectures,

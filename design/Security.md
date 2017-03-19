@@ -1,4 +1,4 @@
-# Security
+# 安全
 
 The security model of WebAssembly has two important goals: (1) protect *users*
 from buggy or malicious modules, and (2) provide *developers* with useful

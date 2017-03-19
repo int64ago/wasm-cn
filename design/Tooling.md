@@ -1,4 +1,4 @@
-# Tooling support
+# 工具支持
 
 Tooling for in-browser execution is often of uneven quality. WebAssembly aims at
 making it possible to support truly great tooling by exposing

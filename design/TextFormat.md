@@ -1,4 +1,4 @@
-# Text Format
+# 文本格式
 
 WebAssembly does not yet have a standardized text format that encodes function
 bodies in addition to module structure, data segments and other program

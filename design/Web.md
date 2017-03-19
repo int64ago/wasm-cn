@@ -1,4 +1,4 @@
-# Web Embedding
+# Web 环境集成
 
 Unsurprisingly, one of WebAssembly's primary purposes is to run on the Web,
 for example embedded in Web browsers (though this is
