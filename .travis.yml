@@ -14,8 +14,8 @@ install:
 - bundle install
 
 before_script:
-- git config --global user.name 'Cody Chan'
-- git config --global user.email 'int64ago@gmail.com'
+- git config --global user.name 'CodyRobot'
+- git config --global user.email 'robot4hs@gmail.com'
 
 script:
 - bundle exec jekyll build
@@ -23,7 +23,7 @@ script:
 after_success:
 - mkdir .deploy
 - cd .deploy
-- git clone --depth 1 --branch gh-pages --single-branch https://$REPO_TOKEN@github.com/int64ago/wasm-cn.git . || (git init && git remote add -t gh-pages origin https://$REPO_TOKEN@github.com/int64ago/wasm-cn.git)
+- git clone --depth 1 --branch gh-pages --single-branch https://$ROBOT_TOKEN@github.com/int64ago/wasm-cn.git . || (git init && git remote add -t gh-pages origin https://$ROBOT_TOKEN@github.com/int64ago/wasm-cn.git)
 - rm -rf ./*
 - cp -r ../docs/* .
 - git add -A .
