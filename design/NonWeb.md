@@ -1,4 +1,4 @@
-# Non-Web Embeddings
+# 非 Web 环境集成
 
 While WebAssembly is designed to run [on the Web](Web.md), it is
 also desirable for it to be able to execute well in other environments,

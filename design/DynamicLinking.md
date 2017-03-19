@@ -1,4 +1,4 @@
-# Dynamic linking
+# 动态链接
 
 WebAssembly enables load-time and run-time (`dlopen`) dynamic linking in the
 MVP by having multiple [instantiated modules](Modules.md)

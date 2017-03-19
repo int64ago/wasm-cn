@@ -1,4 +1,4 @@
-# Use Cases
+# 使用场景
 
 WebAssembly's [high-level goals](HighLevelGoals.md) define *what* WebAssembly
 aims to achieve, and in *which order*. *How* WebAssembly achieves its goals is

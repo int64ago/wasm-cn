@@ -1,6 +1,6 @@
 ---
 layout: default
-lead: WebAssembly 或者 <i>wasm</i> 是一个体积小、加载快并且兼容 Web 的全新格式
+lead: WebAssembly 或者 <i>wasm</i> 是一个可移植、体积小、加载快并且兼容 Web 的全新格式
 ---
 <div class="flash flash-warn">
   WebAssembly 是由主流浏览器厂商组成的 <a href="https://www.w3.org/community/webassembly/">W3C 社区团体</a> 制定的一个新的规范

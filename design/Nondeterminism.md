@@ -1,4 +1,4 @@
-# Nondeterminism in WebAssembly
+# 不确定性
 
 WebAssembly is a [portable](Portability.md) [sandboxed](Security.md) platform
 with limited, local, nondeterminism.

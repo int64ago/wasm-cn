@@ -1,4 +1,4 @@
-# GC / DOM / Web API Integration [:unicorn:][future general]
+# GC / DOM / Web API 集成 [future general]
 
 ## NOTE: This is a [future :unicorn:][future general] feature! ##
 

@@ -1,4 +1,4 @@
-# Minimum Viable Product
+# 最小可行产品
 
 As stated in the [high-level goals](HighLevelGoals.md), the first release aims
 at being a Minimum Viable Product (MVP). This means that there are important

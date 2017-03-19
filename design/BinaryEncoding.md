@@ -1,4 +1,4 @@
-# Binary Encoding
+# 二进制编码
 
 This document describes the [portable](Portability.md) binary encoding of the WebAssembly modules.
 

@@ -1,4 +1,4 @@
-# Features to add after the MVP
+# 未来支持特性
 
 These are features that make sense in the context of the
 [high-level goals](HighLevelGoals.md) of WebAssembly but won't be part of the

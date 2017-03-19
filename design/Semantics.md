@@ -1,4 +1,4 @@
-# Semantics
+# 语义
 
 This document explains the high-level design of WebAssembly code: its types, constructs, and
 semantics.

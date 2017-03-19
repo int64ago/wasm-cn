@@ -1,6 +1,6 @@
 See [rationale](Rationale.md#feature-testing---motivating-scenarios) for motivating scenarios.
 
-# Feature Test
+# 特性测试
 
 [Post-MVP :unicorn:][future general], applications will be able to query which features are
 supported via

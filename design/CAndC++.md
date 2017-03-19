@@ -1,4 +1,4 @@
-# Guide for C/C++ developers
+# C/C++ 开发指南
 
 WebAssembly is being designed to support C and C++ code well, right from
 the start in [the MVP](MVP.md). The following explains the outlook for
