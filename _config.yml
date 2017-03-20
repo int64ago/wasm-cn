@@ -15,6 +15,9 @@ destination: docs
 
 permalink: pretty
 
+gems:
+  - jekyll-sitemap
+
 defaults:
   -
     scope:
