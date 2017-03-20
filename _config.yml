@@ -15,6 +15,7 @@ destination: docs
 
 permalink: pretty
 
+url: "https://wasm-cn.org"
 gems:
   - jekyll-sitemap
 
