@@ -29,7 +29,7 @@ layout: getting-started
 
 把 **wasm2wast** 和 **wast2wasm** 结合起来用可以做到无损地用外部工具操纵 WebAssembly 的内容
 
-#### wasm-interp
+### wasm-interp
 
 这是一个命令行解释器，可以让开发者独立地运行 WebAssembly 二进制程序，它基于栈机器实现了直接解释 WebAssembly 二进制，这点不同于浏览器（加载的时候先将 WebAssembly 二进制转为原生代码）
 
