@@ -1586,6 +1586,11 @@ header {
     font-weight: normal;
 }
 
+.site-logo a {
+    color: #777;
+    cursor: pointer;
+}
+
 @media (min-width: 900px) {
     .site-logo {
         float:left;
