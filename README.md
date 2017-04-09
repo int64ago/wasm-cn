@@ -2,6 +2,8 @@
 
 [![](https://img.shields.io/website/https/wasm-cn.org.svg?style=flat-square)](https://wasm-cn.org/)
 [![](https://img.shields.io/travis/int64ago/wasm-cn.svg?style=flat-square)](https://travis-ci.org/int64ago/wasm-cn)
+[![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
+
 
 翻译自[官方文档](http://webassembly.org/)
 
