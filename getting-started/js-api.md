@@ -68,47 +68,35 @@ fetch('simple.wasm').then(response => response.arrayBuffer())
 
 ## 内存
 
-[Linear memory](/docs/semantics/#linear-memory) is another important WebAssembly building block that is typically used to represent the entire heap of a compiled C/C++ application.  From a JavaScript perspective, linear memory (henceforth, just “memory”) can be thought of as a resizable `ArrayBuffer` that is carefully optimized for low-overhead sandboxing of loads and stores.
+[线性内存](/docs/semantics/#linear-memory) 是 WebAssembly 另一个很重要的概念，用于描述整个编译后的 C/C++ 程序的堆栈。从一个 JavaScript 程序员角度看的话，线性内存（或者简称为”内存“，下同）可以认为是一个可扩展的 `ArrayBuffer`，这个是被高度优化的，使其可以用尽可能少的资源维持一个沙箱环境
 
-
-Memories can be created from JavaScript by supplying their initial size and, optionally, their maximum size:
-
+内存可以从 JavaScript 创建，可以制定初始值以及最大值：
 
 ```js
 var memory = new WebAssembly.Memory({initial:10, maximum:100});
 ```
 
+需要注意的是，`initial` 和 `maximum` 的单位是 *WebAssembly 页*，目前是固定的 64KB ，因此上面分配的内存实际是十页，或者说是 640KB，最大值是 6.4MB
 
-The first important thing to notice is that the unit of `initial` and `maximum` is *WebAssembly pages* which are fixed to be 64KiB.  Thus, `memory` above has an initial size of 10 pages, or 640KiB and a maximum size of 6.4MiB.
-
-
-Since most byte-range operations in JavaScript already operate on `ArrayBuffer` and typed arrays, rather than defining a whole new set of incompatible operations, `WebAssembly.Memory` exposes its bytes by simply providing a `buffer` getter that returns an `ArrayBuffer`.  For example, to write `42` directly into the first word of linear memory:
-
+因为大部分 JavaScript 的字节操作都可以直接作用于 `ArrayBuffer` 上，而不是额外定义一组不兼容的操作，`WebAssembly.Memory` 通过一个 返回值是 `ArrayBuffer` 的 `buffer` 指针来操纵它的字节。比如，需要在线性内存的第一个字节处写入 `42`：
 
 ```js
 new Uint32Array(memory.buffer)[0] = 42;
 ```
 
-
-Once created, a memory can be grown by calls to `Memory.prototype.grow`, where again the argument is specified in units of WebAssembly pages:
-
+一旦内存区域创建了，内存的扩充可以通过调用 `Memory.prototype.grow` 实现：
 
 ```js
 memory.grow(1);
 ```
 
+如果达到了 `maximum`，继续尝试扩充会得到 `RangeError` 异常，引擎通过这种限制内存上限来保证更高效合理的使用内存
 
-If a `maximum` is supplied upon creation, attempts to grow past this `maximum` will throw a `RangeError` exception.  The engines takes advantage of this supplied upper-bounds to reserve memory ahead of time which can make resizing more efficient.
+因为 `ArrayBuffer` 的 `byteLength` 是不能改变的，因此每次成功执行 `Memory.grow` 操作后，`buffer` 都会返回一个新的 `ArrayBuffer`（有新的 `byteLength`），之前的 `ArrayBuffer` 会变成一个游离的对象
 
+跟函数一样，线性内存可以在模块内部定义也可以传进去。类似的，一个模块也可以导出其内存，这意味着 JavaScript 可以通过创建一个 `new WebAssembly.Memory` 并传入模块*或者*接收一个 `Memory` 的导出来访问 WebAssembly 的内存
 
-Since an `ArrayBuffer`’s `byteLength` is immutable, after a successful `Memory.grow` operation, the`buffer` getter will return a *new* `ArrayBuffer` object (with the new `byteLength`) and any previous `ArrayBuffer` objects become “detached” (zero length, many operations throw).
-
-
-Just like functions, linear memories can be defined inside a module or imported.  Similarly, a module may also optionally export its memory.  This means that JavaScript can get access to the memory of a WebAssembly instance either by creating a `new WebAssembly.Memory` and passing it in as an import *or* by receiving a `Memory` export.
-
-
-For example, let’s take a WebAssembly module that sums an array of integers (replacing the body of the function with “...”):
-
+例如，有个计算数组和的 WebAssembly 的模块（函数体被换成了 `...`）：
 
 ```lisp
 (module
@@ -116,9 +104,7 @@ For example, let’s take a WebAssembly module that sums an array of integers (r
   (func (export "accumulate") (param $ptr i32) (param $length i32) …))
 ```
 
-
-Since this module *exports* its memory, given an `Instance` of this module called `instance`, we can use its exports' `mem` getter to create and populate an input array directly in the instance’s linear memory, as follows:
-
+这个模块导出了它的内存，假设模块叫 `instance`，我们可以使用导出的 `mem` 指针去操纵内部内存，如下：
 
 ```js
 var i32 = new Uint32Array(instance.exports.mem);
@@ -127,8 +113,7 @@ for (var i = 0; i < 10; i++)
 var sum = instance.exports.accumulate(0, 10);
 ```
 
+内存*传参*原理跟函数传参类似，仅仅是 `Memory` 对象作为值传递，而不是 JS 函数。内存传参非常有用，主要由于以下两个原因：
 
-Memory *imports* work just like function imports, only `Memory` objects are passed as values instead of JS functions.  Memory imports are useful for two reasons:
-
-- They allow JavaScript to fetch and create the initial contents of memory before or concurrent with module compilation.
-- They allow a single `Memory` object to be imported by multiple instances, which is a critical building block for implementing [dynamic linking](/docs/dynamic-linking) in WebAssembly.
+- 允许 JavaScript 可以在模块编译前或者编译中获取或者设置内存的初始值
+- 允许一个 `Memory` 对象被多个实例传入，这对于实现 WebAssembly 的[动态链接](/docs/dynamic-linking)至关重要
