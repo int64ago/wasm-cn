@@ -109,42 +109,42 @@
 
 <h2 id="内存">内存</h2>
 
-<p><a href="/docs/semantics/#linear-memory">Linear memory</a> is another important WebAssembly building block that is typically used to represent the entire heap of a compiled C/C++ application.  From a JavaScript perspective, linear memory (henceforth, just “memory”) can be thought of as a resizable <code class="highlighter-rouge">ArrayBuffer</code> that is carefully optimized for low-overhead sandboxing of loads and stores.</p>
+<p><a href="/docs/semantics/#linear-memory">线性内存</a> 是 WebAssembly 另一个很重要的概念，用于描述整个编译后的 C/C++ 程序的堆栈。从一个 JavaScript 程序员角度看的话，线性内存（或者简称为”内存“，下同）可以认为是一个可扩展的 <code class="highlighter-rouge">ArrayBuffer</code>，这个是被高度优化的，使其可以用尽可能少的资源维持一个沙箱环境</p>
 
-<p>Memories can be created from JavaScript by supplying their initial size and, optionally, their maximum size:</p>
+<p>内存可以从 JavaScript 创建，可以制定初始值以及最大值：</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">memory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebAssembly</span><span class="p">.</span><span class="nx">Memory</span><span class="p">({</span><span class="na">initial</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="na">maximum</span><span class="p">:</span><span class="mi">100</span><span class="p">});</span>
 </code></pre>
 </div>
 
-<p>The first important thing to notice is that the unit of <code class="highlighter-rouge">initial</code> and <code class="highlighter-rouge">maximum</code> is <em>WebAssembly pages</em> which are fixed to be 64KiB.  Thus, <code class="highlighter-rouge">memory</code> above has an initial size of 10 pages, or 640KiB and a maximum size of 6.4MiB.</p>
+<p>需要注意的是，<code class="highlighter-rouge">initial</code> 和 <code class="highlighter-rouge">maximum</code> 的单位是 <em>WebAssembly 页</em>，目前是固定的 64KB ，因此上面分配的内存实际是十页，或者说是 640KB，最大值是 6.4MB</p>
 
-<p>Since most byte-range operations in JavaScript already operate on <code class="highlighter-rouge">ArrayBuffer</code> and typed arrays, rather than defining a whole new set of incompatible operations, <code class="highlighter-rouge">WebAssembly.Memory</code> exposes its bytes by simply providing a <code class="highlighter-rouge">buffer</code> getter that returns an <code class="highlighter-rouge">ArrayBuffer</code>.  For example, to write <code class="highlighter-rouge">42</code> directly into the first word of linear memory:</p>
+<p>因为大部分 JavaScript 的字节操作都可以直接作用于 <code class="highlighter-rouge">ArrayBuffer</code> 上，而不是额外定义一组不兼容的操作，<code class="highlighter-rouge">WebAssembly.Memory</code> 通过一个 返回值是 <code class="highlighter-rouge">ArrayBuffer</code> 的 <code class="highlighter-rouge">buffer</code> 指针来操纵它的字节。比如，需要在线性内存的第一个字节处写入 <code class="highlighter-rouge">42</code>：</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="nx">memory</span><span class="p">.</span><span class="nx">buffer</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 </code></pre>
 </div>
 
-<p>Once created, a memory can be grown by calls to <code class="highlighter-rouge">Memory.prototype.grow</code>, where again the argument is specified in units of WebAssembly pages:</p>
+<p>一旦内存区域创建了，内存的扩充可以通过调用 <code class="highlighter-rouge">Memory.prototype.grow</code> 实现：</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">memory</span><span class="p">.</span><span class="nx">grow</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 </code></pre>
 </div>
 
-<p>If a <code class="highlighter-rouge">maximum</code> is supplied upon creation, attempts to grow past this <code class="highlighter-rouge">maximum</code> will throw a <code class="highlighter-rouge">RangeError</code> exception.  The engines takes advantage of this supplied upper-bounds to reserve memory ahead of time which can make resizing more efficient.</p>
+<p>如果达到了 <code class="highlighter-rouge">maximum</code>，继续尝试扩充会得到 <code class="highlighter-rouge">RangeError</code> 异常，引擎通过这种限制内存上限来保证更高效合理的使用内存</p>
 
-<p>Since an <code class="highlighter-rouge">ArrayBuffer</code>’s <code class="highlighter-rouge">byteLength</code> is immutable, after a successful <code class="highlighter-rouge">Memory.grow</code> operation, the<code class="highlighter-rouge">buffer</code> getter will return a <em>new</em> <code class="highlighter-rouge">ArrayBuffer</code> object (with the new <code class="highlighter-rouge">byteLength</code>) and any previous <code class="highlighter-rouge">ArrayBuffer</code> objects become “detached” (zero length, many operations throw).</p>
+<p>因为 <code class="highlighter-rouge">ArrayBuffer</code> 的 <code class="highlighter-rouge">byteLength</code> 是不能改变的，因此每次成功执行 <code class="highlighter-rouge">Memory.grow</code> 操作后，<code class="highlighter-rouge">buffer</code> 都会返回一个新的 <code class="highlighter-rouge">ArrayBuffer</code>（有新的 <code class="highlighter-rouge">byteLength</code>），之前的 <code class="highlighter-rouge">ArrayBuffer</code> 会变成一个游离的对象</p>
 
-<p>Just like functions, linear memories can be defined inside a module or imported.  Similarly, a module may also optionally export its memory.  This means that JavaScript can get access to the memory of a WebAssembly instance either by creating a <code class="highlighter-rouge">new WebAssembly.Memory</code> and passing it in as an import <em>or</em> by receiving a <code class="highlighter-rouge">Memory</code> export.</p>
+<p>跟函数一样，线性内存可以在模块内部定义也可以传进去。类似的，一个模块也可以导出其内存，这意味着 JavaScript 可以通过创建一个 <code class="highlighter-rouge">new WebAssembly.Memory</code> 并传入模块<em>或者</em>接收一个 <code class="highlighter-rouge">Memory</code> 的导出来访问 WebAssembly 的内存</p>
 
-<p>For example, let’s take a WebAssembly module that sums an array of integers (replacing the body of the function with “…”):</p>
+<p>例如，有个计算数组和的 WebAssembly 的模块（函数体被换成了 <code class="highlighter-rouge">...</code>）：</p>
 
 <pre><code class="language-lisp">(module
   (memory (export "mem") 1)
   (func (export "accumulate") (param $ptr i32) (param $length i32) …))
 </code></pre>
 
-<p>Since this module <em>exports</em> its memory, given an <code class="highlighter-rouge">Instance</code> of this module called <code class="highlighter-rouge">instance</code>, we can use its exports’ <code class="highlighter-rouge">mem</code> getter to create and populate an input array directly in the instance’s linear memory, as follows:</p>
+<p>这个模块导出了它的内存，假设模块叫 <code class="highlighter-rouge">instance</code>，我们可以使用导出的 <code class="highlighter-rouge">mem</code> 指针去操纵内部内存，如下：</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">i32</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">mem</span><span class="p">);</span>
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
@@ -153,11 +153,11 @@
 </code></pre>
 </div>
 
-<p>Memory <em>imports</em> work just like function imports, only <code class="highlighter-rouge">Memory</code> objects are passed as values instead of JS functions.  Memory imports are useful for two reasons:</p>
+<p>内存<em>传参</em>原理跟函数传参类似，仅仅是 <code class="highlighter-rouge">Memory</code> 对象作为值传递，而不是 JS 函数。内存传参非常有用，主要由于以下两个原因：</p>
 
 <ul>
-  <li>They allow JavaScript to fetch and create the initial contents of memory before or concurrent with module compilation.</li>
-  <li>They allow a single <code class="highlighter-rouge">Memory</code> object to be imported by multiple instances, which is a critical building block for implementing <a href="/docs/dynamic-linking">dynamic linking</a> in WebAssembly.</li>
+  <li>允许 JavaScript 可以在模块编译前或者编译中获取或者设置内存的初始值</li>
+  <li>允许一个 <code class="highlighter-rouge">Memory</code> 对象被多个实例传入，这对于实现 WebAssembly 的<a href="/docs/dynamic-linking">动态链接</a>至关重要</li>
 </ul>
 
       </div>
