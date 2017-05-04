@@ -48,22 +48,16 @@
       <div class="col-xs-12 col-lg-9 col-pop">
         <h1 id="问答">问答</h1>
 
-<h2 id="why-create-a-new-standard-when-there-is-already-asmjs">Why create a new standard when there is already asm.js?</h2>
+<h2 id="既然有了-asmjs-为什么还造一个轮子">既然有了 asm.js， 为什么还造一个轮子？</h2>
 
-<p>… especially since pthreads (<a href="https://blog.mozilla.org/javascript/2015/02/26/the-path-to-parallel-javascript/">Mozilla pthreads</a>, <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/d-0ibJwCS24">Chromium pthreads</a>) and
-SIMD (<a href="https://hacks.mozilla.org/2014/10/introducing-simd-js/">simd.js</a>, <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/2PIOEJG_aYY">Chromium SIMD</a>, <a href="http://discourse.specifiction.org/t/request-for-comments-simd-js-in-asm-js/676">simd.js in asm.js</a>) are coming to
-JavaScript.</p>
+<p>… 其实还有 pthreads (<a href="https://blog.mozilla.org/javascript/2015/02/26/the-path-to-parallel-javascript/">Mozilla pthreads</a>, <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/d-0ibJwCS24">Chromium pthreads</a>) 和
+SIMD (<a href="https://hacks.mozilla.org/2014/10/introducing-simd-js/">simd.js</a>, <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/2PIOEJG_aYY">Chromium SIMD</a>, <a href="http://discourse.specifiction.org/t/request-for-comments-simd-js-in-asm-js/676">simd.js in asm.js</a>)</p>
 
-<p>There are two main benefits WebAssembly provides:</p>
+<p>WebAssembly 主要有两个好处：</p>
 
 <ol>
   <li>
-    <p>The kind of binary format being considered for WebAssembly can be natively
-decoded much faster than JavaScript can be parsed (<a href="../binary-encoding/#why-a-binary-encoding-instead-of-a-text-only-representation">experiments</a> show more
-than 20× faster).  On mobile, large compiled codes can easily take 20–40
-seconds <em>just to parse</em>, so native decoding (especially when combined with
-other techniques like <a href="https://www.w3.org/TR/streams-api/">streaming</a> for better-than-gzip compression) is
-critical to providing a good cold-load user experience.</p>
+    <p>采用的原生编码后的二进制相对于 JavaScript 解析速度快了不少（<a href="../binary-encoding/#why-a-binary-encoding-instead-of-a-text-only-representation">实验</a> 表明加速超过 20 倍），在移动端，大的源文件可能需要 20-40 秒仅仅为了<em>解析</em>，因此原生编码（特别是结合其它<a href="https://www.w3.org/TR/streams-api/">工具流</a>达到更好的压缩效果）对于提升代码加载速度很重要</p>
   </li>
   <li>
     <p>By avoiding the simultaneous asm.js constraints of <a href="http://asmjs.org/spec/latest/#ahead-of-time-compilation">AOT</a>-<a href="https://blog.mozilla.org/luke/2014/01/14/asm-js-aot-compilation-and-startup-performance/">compilability</a>
