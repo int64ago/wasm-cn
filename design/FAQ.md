@@ -1,10 +1,9 @@
 # 问答
 
-## Why create a new standard when there is already asm.js?
+## 既然有了 asm.js， 为什么还造一个轮子？
 
-... especially since pthreads ([Mozilla pthreads][], [Chromium pthreads][]) and
-SIMD ([simd.js][], [Chromium SIMD][], [simd.js in asm.js][]) are coming to
-JavaScript.
+... 其实还有 pthreads ([Mozilla pthreads][], [Chromium pthreads][]) 和
+SIMD ([simd.js][], [Chromium SIMD][], [simd.js in asm.js][])
 
   [Mozilla pthreads]: https://blog.mozilla.org/javascript/2015/02/26/the-path-to-parallel-javascript/
   [Chromium pthreads]: https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/d-0ibJwCS24
@@ -12,14 +11,9 @@ JavaScript.
   [Chromium SIMD]: https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/2PIOEJG_aYY
   [simd.js in asm.js]: http://discourse.specifiction.org/t/request-for-comments-simd-js-in-asm-js/676
 
-There are two main benefits WebAssembly provides:
+WebAssembly 主要有两个好处：
 
-1. The kind of binary format being considered for WebAssembly can be natively
-   decoded much faster than JavaScript can be parsed ([experiments][] show more
-   than 20× faster).  On mobile, large compiled codes can easily take 20–40
-   seconds *just to parse*, so native decoding (especially when combined with
-   other techniques like [streaming][] for better-than-gzip compression) is
-   critical to providing a good cold-load user experience.
+1. 采用的原生编码后的二进制相对于 JavaScript 解析速度快了不少（[实验][experiments] 表明加速超过 20 倍），在移动端，大的源文件可能需要 20-40 秒仅仅为了*解析*，因此原生编码（特别是结合其它[工具流][streaming]达到更好的压缩效果）对于提升代码加载速度很重要
 
 2. By avoiding the simultaneous asm.js constraints of [AOT][]-[compilability][]
    and good performance even on engines without
