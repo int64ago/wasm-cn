@@ -4,4 +4,6 @@
 
 如果你发现翻译中有跟原文档不一致的地方或错误，又或者你想参与某些部分的翻译，都可以提 PR
 
-又或者你想长期参与翻译，可以加你为 Collaborators
+又或者你想长期参与翻译，发 Issue，可以加你为 Collaborator
+
+> 注意：为了保持主分支干净，如果同在 master 分支提交，请使用 `git pull --rebase` 代替 `git pull`
