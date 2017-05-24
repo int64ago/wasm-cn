@@ -15,11 +15,7 @@ WebAssembly 主要有两个好处：
 
 1. 采用的原生编码后的二进制相对于 JavaScript 解析速度快了不少（[实验][experiments] 表明加速超过 20 倍），在移动端，大的源文件可能需要 20-40 秒仅仅为了*解析*，因此原生编码（特别是结合其它[工具流][streaming]达到更好的压缩效果）对于提升代码加载速度很重要
 
-2. By avoiding the simultaneous asm.js constraints of [AOT][]-[compilability][]
-   and good performance even on engines without
-   [specific asm.js optimizations][], a new standard makes it *much easier* to
-   add the [features :unicorn:][future features] required to reach native
-   levels of performance.
+2. 为了避免重复经历 asm.js 在 [AOT][]-[compilability][] 上的限制，同时在没有 [针对 asm.js 的优化措施][specific asm.js optimizations]的前提下能够得到好的性能，提出一个新的东西可以*更容易*去添加一些[特性 :unicorn:][future features]来达到原生性能的目的
 
   [experiments]: BinaryEncoding.md#why-a-binary-encoding-instead-of-a-text-only-representation
   [streaming]: https://www.w3.org/TR/streams-api/
@@ -27,39 +23,22 @@ WebAssembly 主要有两个好处：
   [compilability]: https://blog.mozilla.org/luke/2014/01/14/asm-js-aot-compilation-and-startup-performance/
   [specific asm.js optimizations]: https://blog.mozilla.org/luke/2015/02/18/microsoft-announces-asm-js-optimizations/#asmjs-opts
 
-Of course, every new standard introduces new costs (maintenance, attack surface,
-code size) that must be offset by the benefits. WebAssembly minimizes costs by
-having a design that allows (though not requires) a browser to implement
-WebAssembly inside its *existing* JavaScript engine (thereby reusing the
-JavaScript engine's existing compiler backend, ES6 module loading frontend,
-security sandboxing mechanisms and other supporting VM components). Thus, in
-cost, WebAssembly should be comparable to a big new JavaScript feature, not a
-fundamental extension to the browser model.
+当然，每次新标准出现都会带来新的问题（维护、反对声、体积），不过瑕不掩瑜。WebAssembly 允许浏览器直接在现有的 JavaScript 引擎里引入（复用现有的编译器后端和 ESM 前端）。总体而言，WebAssembly 可以认为是 JavaScript 一个大的特性，而不是浏览器的一个扩展
 
-Comparing the two, even for engines which already optimize asm.js, the benefits
-outweigh the costs.
+综上，即使引擎针对 asm.js 进行了优化，WebAssembly 好处还是很明显的
+
+## WebAssembly 使用场景是什么？
+
+WebAssembly 设计是针对[大量使用场景](UseCases.md)的
 
 
-## What are WebAssembly's use cases?
+## WebAssembly 可以通过垫片实现吗？
 
-WebAssembly was designed with [a variety of use cases in mind](UseCases.md).
+我们认为是可以的，早期已经有很多[原型](https://github.com/WebAssembly/polyfill-prototype-1)例子[[1](https://lukewagner.github.io/AngryBotsPacked), [2](https://lukewagner.github.io/PlatformerGamePacked)]展示了从类似 WebAssembly 的二进制格式解码为 asm.js 是高效的
 
+并且随着 WebAssembly 设计的改变，已经有[更多](https://github.com/WebAssembly/polyfill-prototype-2)采用垫片的[实验](https://github.com/WebAssembly/binaryen/blob/master/src/wasm2asm.h)
 
-## Can WebAssembly be polyfilled?
-
-We think so. There was an early
-[prototype](https://github.com/WebAssembly/polyfill-prototype-1) with demos 
-[[1](https://lukewagner.github.io/AngryBotsPacked), 
-[2](https://lukewagner.github.io/PlatformerGamePacked)], which showed
-that decoding a binary WebAssembly-like format into asm.js can be efficient.
-And as the WebAssembly design has changed there have been
-[more](https://github.com/WebAssembly/polyfill-prototype-2)
-[experiments](https://github.com/WebAssembly/binaryen/blob/master/src/wasm2asm.h)
-with polyfilling.
-
-Overall, optimism has been increasing for quick adoption of WebAssembly in
-browsers, which is great, but it has decreased the motivation to work on a
-polyfill.
+总的说来，浏览器接受 WebAssembly 的速度被乐观估计了，这是好事，但是在垫片上推进工程是很容易受阻的
 
 It is also the case that polyfilling WebAssembly to asm.js is less urgent
 because of the existence of alternatives, for example, a reverse polyfill -
