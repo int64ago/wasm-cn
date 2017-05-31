@@ -40,21 +40,9 @@ WebAssembly 设计是针对[大量使用场景](UseCases.md)的
 
 总的说来，浏览器接受 WebAssembly 的速度被乐观估计了，这是好事，但是在垫片上推进工程是很容易受阻的
 
-It is also the case that polyfilling WebAssembly to asm.js is less urgent
-because of the existence of alternatives, for example, a reverse polyfill -
-compiling
-[asm.js to WebAssembly](https://github.com/WebAssembly/binaryen/blob/master/src/asm2wasm.h) -
-exists, and it allows shipping a single build that can run as either
-asm.js or WebAssembly. It is also possible to build a project into
-two parallel asm.js and WebAssembly builds by just
-[flipping a switch](https://github.com/kripken/emscripten/wiki/WebAssembly)
-in emscripten, which avoids polyfill time on the client entirely. A third
-option, for non-performant code, is to use a compiled WebAssembly interpreter
-such as
-[binaryen.js](https://github.com/WebAssembly/binaryen/blob/master/test/binaryen.js/test.js).
+当前，用垫片把 WebAssembly 模拟为 asm.js 不是很紧迫，已经有反向的垫片可以[把 asm.js 模拟为 WebAssembly](https://github.com/WebAssembly/binaryen/blob/master/src/asm2wasm.h)，最终分发为 asm.js 还是 WebAssembly 都是可以的。而且还可以通过调整 emscripten 的[参数](https://github.com/kripken/emscripten/wiki/WebAssembly)构建出 asm.js 和 WebAssembly 同时可以运行的代码，节省了在客户端加载垫片的时间。对于性能要求不高的代码，可以选择一个已经编译好的 WebAssembly 解释器 [binaryen.js](https://github.com/WebAssembly/binaryen/blob/master/test/binaryen.js/test.js).
 
-However, a WebAssembly polyfill is still an interesting idea and should in
-principle be possible.
+最后，用垫片实现 WebAssembly 确实是个有意思的想法，而且原则上是可能的
 
 
 ## Is WebAssembly only for C/C++ programmers?
