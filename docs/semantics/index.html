@@ -294,7 +294,8 @@ greatest alignment values practical, while always avoiding misaligned accesses.<
 
 <h3 id="out-of-bounds">Out of Bounds</h3>
 
-<p>Out of bounds accesses trap. If the access is a store, if any of the accessed bytes are out of bounds, none of the bytes are modified.</p>
+<p>Out of bounds accesses trap. If the access is a store, if any of the accessed
+bytes are out of bounds, none of the bytes are modified.</p>
 
 <h3 id="resizing">Resizing</h3>
 
@@ -935,7 +936,7 @@ but conceptually, values of any type can be popped off a polymorphic stack for t
 A polymorphic stack also matches any possible signature at the end of a block or function.
 After the end of a block, the stack is determined by the block signature and the stack before the block.</p>
 
-<p>The details of validation are currently defined by the <a href="https://github.com/WebAssembly/spec/blob/master/interpreter/spec/valid.ml#L162">spec interpreter</a>.</p>
+<p>The details of validation are currently defined by the <a href="https://github.com/WebAssembly/spec/blob/master/interpreter/valid/valid.ml#L178">spec interpreter</a>.</p>
 
       </div>
       <div class="col-xs-12 col-lg-3">
@@ -993,10 +994,6 @@ After the end of a block, the stack is determined by the block signature and the
         
           
           <a class="side-nav-item" href="/docs/future-features/">未来支持特性</a>
-          
-        
-          
-          <a class="side-nav-item" href="/docs/gc/">GC / DOM / Web API 集成</a>
           
         
           

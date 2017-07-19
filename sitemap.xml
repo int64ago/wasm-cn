@@ -49,9 +49,6 @@
 <loc>https://wasm-cn.org/docs/future-features/</loc>
 </url>
 <url>
-<loc>https://wasm-cn.org/docs/gc/</loc>
-</url>
-<url>
 <loc>https://wasm-cn.org/docs/high-level-goals/</loc>
 </url>
 <url>
@@ -98,6 +95,6 @@
 </url>
 <url>
 <loc>https://wasm-cn.org/demo/Tanks/index.html</loc>
-<lastmod>2017-06-20T15:27:32+00:00</lastmod>
+<lastmod>2017-07-19T14:02:06+00:00</lastmod>
 </url>
 </urlset>

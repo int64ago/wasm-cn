@@ -213,7 +213,8 @@ greatest alignment values practical, while always avoiding misaligned accesses.
 
 ### Out of Bounds
 
-Out of bounds accesses trap. If the access is a store, if any of the accessed bytes are out of bounds, none of the bytes are modified.
+Out of bounds accesses trap. If the access is a store, if any of the accessed
+bytes are out of bounds, none of the bytes are modified.
 
 ### Resizing
 
@@ -705,4 +706,4 @@ but conceptually, values of any type can be popped off a polymorphic stack for t
 A polymorphic stack also matches any possible signature at the end of a block or function.
 After the end of a block, the stack is determined by the block signature and the stack before the block.
 
-The details of validation are currently defined by the [spec interpreter](https://github.com/WebAssembly/spec/blob/master/interpreter/spec/valid.ml#L162).
+The details of validation are currently defined by the [spec interpreter](https://github.com/WebAssembly/spec/blob/master/interpreter/valid/valid.ml#L178).
